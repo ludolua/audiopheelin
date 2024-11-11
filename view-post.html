@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Postagem</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2em;
+    }
+    article {
+      margin-top: 20px;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Postagem</h1>
+  </header>
+
+  <div class="container">
+    <div id="postContainer">
+      <h2 id="postTitle"></h2>
+      <article id="postContent"></article>
+    </div>
+  </div>
+
+  <script>
+    // Função para carregar a postagem com base no ID da URL
+    function loadPost() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get('id');
+
+      if (!postId) {
+        alert("Post não encontrado!");
+        return;
+      }
+
+      // Recuperar os dados da postagem do localStorage
+      const postData = JSON.parse(localStorage.getItem(`post_${postId}`));
+
+      if (!postData) {
+        alert("Post não encontrado!");
+        return;
+      }
+
+      // Exibir os dados da postagem na página
+      document.getElementById('postTitle').textContent = postData.title;
+      document.getElementById('postContent').innerHTML = postData.content;
+    }
+
+    // Carregar a postagem assim que a página for carregada
+    window.onload = loadPost;
+  </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filtro de Produtos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Produtos Filtrados</h1>
+
+<div id="table-container">
+  <!-- A tabela de produtos filtrados será inserida aqui -->
+</div>
+
+<script>
+  // Função para criar a tabela filtrada
+  function createFilteredTable(data) {
+    const tableContainer = document.getElementById('table-container');
+    tableContainer.innerHTML = '';  // Limpa qualquer conteúdo anterior
+
+    if (data.length === 0) {
+      tableContainer.innerHTML = '<p style="text-align:center;">Nenhum produto encontrado para esta categoria.</p>';
+      return;
+    }
+
+    const table = document.createElement('table');
+
+    // Cabeçalho da tabela
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    const headers = ['Produto', 'Link', 'Categoria'];
+    headers.forEach(header => {
+      const th = document.createElement('th');
+      th.textContent = header;
+      headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    // Corpo da tabela
+    const tbody = document.createElement('tbody');
+    data.forEach(item => {
+      const row = document.createElement('tr');
+      // Coluna Produto
+      const produtoCell = document.createElement('td');
+      produtoCell.textContent = item.produto;
+      row.appendChild(produtoCell);
+
+      // Coluna Link
+      const linkCell = document.createElement('td');
+      const link = document.createElement('a');
+      link.href = item.link;
+      link.textContent = 'Link';
+      linkCell.appendChild(link);
+      row.appendChild(linkCell);
+
+      // Coluna Categoria
+      const categoriaCell = document.createElement('td');
+      categoriaCell.textContent = item.categoria;
+      row.appendChild(categoriaCell);
+
+      tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+    tableContainer.appendChild(table);
+  }
+
+  // Função para filtrar produtos com base na categoria
+  function filterByCategory(category) {
+    fetch('itens.json')
+      .then(response => response.json())
+      .then(data => {
+        const filteredProducts = data.headphone.filter(item => item.categoria === category);
+        createFilteredTable(filteredProducts);
+      })
+      .catch(error => console.error('Erro ao carregar os dados:', error));
+  }
+
+  // Obtém a categoria a partir da URL e filtra os produtos
+  const urlParams = new URLSearchParams(window.location.search);
+  const category = urlParams.get('categoria');
+  if (category) {
+    filterByCategory(category);
+  }
+</script>
+
+</body>
+</html>

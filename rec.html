@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tabela de Produtos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    header {
+      background-color: #333;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    header nav {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    header nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    .logo {
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    .logo span:nth-child(2) {
+      font-family: "Georgia", serif;
+      color: #ff6347;
+    }
+
+    .logo span:nth-child(3) {
+      font-family: "Arial", sans-serif;
+      color: #4682b4;
+    }
+
+    a {
+      text-decoration: none !important;
+    }
+
+    .logo,
+    .logo:link,
+    .logo:visited,
+    .logo:hover,
+    .logo:active {
+      color: white;
+      text-decoration: none;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 24px;
+    }
+
+    table {
+      width: 100%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      border: 1px solid #ddd;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 25px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .hamburger div {
+      width: 30px;
+      height: 5px;
+      background-color: white;
+    }
+
+    #popupMenu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #popupMenu .menu-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+      position: relative;
+      max-width: 300px;
+      width: 100%;
+    }
+
+    #popupMenu a {
+      display: block;
+      margin: 10px 0;
+      font-size: 18px;
+      color: #333;
+    }
+
+    #popupMenu .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: transparent;
+      border: none;
+      font-size: 18px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .logo,
+    .logo:visited {
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 28px;
+      }
+
+      header nav {
+        display: none;
+        width: 100%;
+        text-align: center;
+      }
+
+      header nav a {
+        font-size: 16px;
+        margin: 10px 0;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      header nav.show {
+        display: block;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 22px;
+      }
+
+      header nav a {
+        font-size: 14px;
+        margin: 5px 0;
+      }
+
+      table {
+        font-size: 12px;
+      }
+
+      th,
+      td {
+        padding: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <span>A</span><span>udi</span><span>opheelin</span>
+    </a>
+
+    <!-- Menu Hamburger -->
+    <button class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </button>
+
+    <!-- Menu de navegação -->
+    <nav>
+      <a href="/">Início</a>
+      <a href="/blog">Blog</a>
+      <a href="/rec.html">Recomendações</a>
+      <a href="/listas">Listas</a>
+      <a href="/contato">Contato</a>
+    </nav>
+  </header>
+
+  <!-- Popup com o menu -->
+  <div id="popupMenu">
+    <div class="menu-content">
+      <button class="close-btn" id="closePopup">Voltar</button>
+      <a href="/">Início</a>
+      <a href="/blog">Blog</a>
+      <a href="/rec.html">Recomendações</a>
+      <a href="/listas">Listas</a>
+      <a href="/contato">Contato</a>
+    </div>
+  </div>
+
+  <div id="tables-container">
+
+  </div>
+
+  <script>
+    document.getElementById("hamburger").addEventListener("click", () => {
+      const popupMenu = document.getElementById("popupMenu");
+      popupMenu.style.display =
+        popupMenu.style.display === "flex" ? "none" : "flex";
+    });
+
+    document.getElementById("closePopup").addEventListener("click", () => {
+      document.getElementById("popupMenu").style.display = "none";
+    });
+
+    document.querySelectorAll("#popupMenu a").forEach((link) => {
+      link.addEventListener("click", () => {
+        document.getElementById("popupMenu").style.display = "none";
+      });
+    });
+
+    function createTable(categoryName, data) {
+      const title = document.createElement("h1");
+      title.textContent =
+        categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
+      document.getElementById("tables-container").appendChild(title);
+
+      const table = document.createElement("table");
+      const thead = document.createElement("thead");
+      const headerRow = document.createElement("tr");
+      const keys = Object.keys(data[0]);
+
+      keys.forEach((key) => {
+        const th = document.createElement("th");
+        th.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement("tbody");
+      data.forEach((item) => {
+        const row = document.createElement("tr");
+        keys.forEach((key) => {
+          const td = document.createElement("td");
+          if (key === "link" || key === "acessorio") {
+            if (item[key]) {
+              const link = document.createElement("a");
+              link.href = item[key];
+              link.textContent = key === "link" ? "Link" : "Espumas";
+              td.appendChild(link);
+            } else {
+              td.textContent = "-";
+            }
+          } else if (key === "categoria") {
+            const filterLink = document.createElement("a");
+            filterLink.href = `category.html?categoria=${item[key]}`;
+            filterLink.textContent = item[key];
+            td.appendChild(filterLink);
+          } else {
+            td.textContent = item[key];
+          }
+          row.appendChild(td);
+        });
+        tbody.appendChild(row);
+      });
+      table.appendChild(tbody);
+
+      document.getElementById("tables-container").appendChild(table);
+    }
+
+    fetch("itens.json")
+      .then((response) => response.json())
+      .then((data) => {
+        Object.keys(data).forEach((category) => {
+          createTable(category, data[category]);
+        });
+      })
+      .catch((error) => console.error("Erro ao carregar o JSON:", error));
+  </script>
+</body>
+
+</html>

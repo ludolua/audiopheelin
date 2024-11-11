@@ -1,0 +1,65 @@
+{
+  "dacs": [
+    {
+      "produto": "DAC Frooloop",
+      "link": "https://pt.aliexpress.com/item/1005006483375230.html"
+    },
+    {
+      "produto": "Hiby FC3",
+      "link": "https://pt.aliexpress.com/item/1005002003179693.html"
+    },
+    {
+      "produto": "YONGSE Y01",
+      "link": "https://pt.aliexpress.com/item/1005007144826608.html"
+    }
+  ],
+  "iems": [
+    {
+      "produto": "TRN EMA",
+      "link": "https://pt.aliexpress.com/item/1005004413047789.html",
+      "acessorio": ""
+    },
+    {
+      "produto": "Nicehck Traceless",
+      "link": "https://pt.aliexpress.com/item/1005007184953283.html",
+      "acessorio": "https://pt.aliexpress.com/item/32671911259.html"
+    },
+    {
+      "produto": "Nicehck YD30",
+      "link": "https://pt.aliexpress.com/item/1005005048322186.html",
+      "acessorio": "https://pt.aliexpress.com/item/32671911259.html"
+    },
+    {
+      "produto": "Moondrop Quark",
+      "link": "https://pt.aliexpress.com/item/1005003086848610.html",
+      "acessorio": ""
+    },
+    {
+      "produto": "Moondrop Quark 2",
+      "link": "https://pt.aliexpress.com/item/1005007466221293.html",
+      "acessorio": ""
+    }
+  ],
+  "tws": [
+    {
+      "produto": "Moondrop Space Travel",
+      "link": "https://pt.aliexpress.com/item/1005005879652599.html"
+    },
+    {
+      "produto":"Anker P20I",
+      "link": "https://pt.aliexpress.com/item/1005005472256209.html"
+    }
+  ],
+  "headphone": [
+    {
+      "produto": "Anker Life Q30",
+      "link":"https://pt.aliexpress.com/item/1005001625122784.html",
+      "categoria": "Bluetooth"
+    },
+    {
+      "produto": "Phillips SHP9500",
+      "link": "https://pt.aliexpress.com/item/1005006769561765.html",
+      "categoria": "Wired"
+    }
+  ]
+}

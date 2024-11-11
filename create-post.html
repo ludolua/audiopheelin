@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Postagem</title>
+</head>
+<body>
+    <h1>Criar Postagem</h1>
+    <form id="createPostForm">
+        <label for="postTitle">Título:</label>
+        <input type="text" id="postTitle" name="postTitle" required>
+        <br>
+        <label for="postContent">Conteúdo:</label>
+        <textarea id="postContent" name="postContent" rows="10" cols="50" required></textarea>
+        <br>
+        <button type="button" id="saveBtn">Salvar Postagem</button>
+    </form>
+
+    <script>
+        document.getElementById('saveBtn').addEventListener('click', function () {
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+
+            if (title && content) {
+                // Criar um objeto de postagem
+                const post = {
+                    title: title,
+                    content: content,
+                    date: new Date().toISOString(),
+                };
+
+                // Recupera as postagens existentes do localStorage
+                let posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+                // Adiciona a nova postagem
+                posts.push(post);
+
+                // Salva no localStorage
+                localStorage.setItem('posts', JSON.stringify(posts));
+
+                alert('Postagem salva com sucesso!');
+                // Redireciona para a página de postagens
+                window.location.href = 'blog.html';
+            } else {
+                alert('Preencha todos os campos!');
+            }
+        });
+    </script>
+</body>
+</html>
